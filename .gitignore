@@ -1,0 +1,4 @@
+node_modules/
+com.digitis.disorder-deck.sdPlugin/bin/
+com.digitis.disorder-deck.sdPlugin/logs/
+*.streamDeckPlugin

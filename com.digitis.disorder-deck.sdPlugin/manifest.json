@@ -1,0 +1,104 @@
+{
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+  "UUID": "com.digitis.disorder-deck",
+  "Name": "Disorder Deck",
+  "Author": "Digitis",
+  "Description": "Control Disorder Overlay from your Stream Deck",
+  "Version": "1.0.0.0",
+  "CodePath": "bin/plugin.js",
+  "Icon": "imgs/plugin-icon",
+  "Category": "Disorder",
+  "CategoryIcon": "imgs/plugin-icon",
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "6.9"
+  },
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Nodejs": {
+    "Version": "20",
+    "Debug": "enabled"
+  },
+  "Actions": [
+    {
+      "UUID": "com.digitis.disorder-deck.toggle-admin-tab",
+      "Name": "OP / ALL",
+      "Tooltip": "Bascule entre les onglets OP et ALL du panneau admin",
+      "Icon": "imgs/actions/toggle-admin",
+      "States": [
+        { "Name": "OP", "Image": "imgs/actions/toggle-admin" },
+        { "Name": "ALL", "Image": "imgs/actions/toggle-admin" }
+      ]
+    },
+    {
+      "UUID": "com.digitis.disorder-deck.toggle-fleet-tab",
+      "Name": "Fleet / TS Live",
+      "Tooltip": "Bascule entre Fleet et TS Live",
+      "Icon": "imgs/actions/toggle-fleet",
+      "States": [
+        { "Name": "Fleet", "Image": "imgs/actions/toggle-fleet" },
+        { "Name": "TS Live", "Image": "imgs/actions/toggle-fleet" }
+      ]
+    },
+    {
+      "UUID": "com.digitis.disorder-deck.toggle-ts-mode",
+      "Name": "Normal / FDG",
+      "Tooltip": "Bascule entre mode Normal et FDG",
+      "Icon": "imgs/actions/toggle-mode",
+      "States": [
+        { "Name": "Normal", "Image": "imgs/actions/toggle-mode" },
+        { "Name": "FDG", "Image": "imgs/actions/toggle-mode" }
+      ]
+    },
+    {
+      "UUID": "com.digitis.disorder-deck.trigger-help",
+      "Name": "Help (SOS)",
+      "Tooltip": "Envoie un signal Help visible par tous",
+      "Icon": "imgs/actions/help",
+      "States": [
+        { "Image": "imgs/actions/help" }
+      ]
+    },
+    {
+      "UUID": "com.digitis.disorder-deck.trigger-dead",
+      "Name": "Dead",
+      "Tooltip": "Marque comme mort / annule",
+      "Icon": "imgs/actions/dead",
+      "States": [
+        { "Name": "Alive", "Image": "imgs/actions/dead" },
+        { "Name": "Dead", "Image": "imgs/actions/dead" }
+      ]
+    },
+    {
+      "UUID": "com.digitis.disorder-deck.reset-dead",
+      "Name": "Reset Dead",
+      "Tooltip": "Reset tous les morts (leads only)",
+      "Icon": "imgs/actions/reset-dead",
+      "States": [
+        { "Image": "imgs/actions/reset-dead" }
+      ]
+    },
+    {
+      "UUID": "com.digitis.disorder-deck.toggle-overlay",
+      "Name": "Show / Hide",
+      "Tooltip": "Afficher / masquer l'overlay",
+      "Icon": "imgs/actions/toggle-admin",
+      "States": [
+        { "Image": "imgs/actions/toggle-admin" }
+      ]
+    },
+    {
+      "UUID": "com.digitis.disorder-deck.quit-overlay",
+      "Name": "Quit Overlay",
+      "Tooltip": "Fermer Disorder Overlay",
+      "Icon": "imgs/actions/dead",
+      "States": [
+        { "Image": "imgs/actions/dead" }
+      ]
+    }
+  ]
+}

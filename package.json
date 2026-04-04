@@ -1,0 +1,23 @@
+{
+  "name": "disorder-deck",
+  "version": "1.0.0",
+  "description": "Stream Deck plugin for Disorder Overlay",
+  "main": "src/plugin.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "pack": "npm run build && npx streamdeck pack com.digitis.disorder-deck.sdPlugin"
+  },
+  "type": "module",
+  "author": "Digitis",
+  "license": "MIT",
+  "dependencies": {
+    "@elgato/streamdeck": "^2.0.4",
+    "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "@elgato/cli": "^1.7.3",
+    "@types/ws": "^8.18.1",
+    "typescript": "^6.0.2"
+  }
+}

@@ -11,6 +11,7 @@ export interface OverlayState {
   tsConnected: boolean;
   voiceCount: number;
   whisperActive: boolean;
+  selfStatus?: string;
 }
 
 class OverlayClient extends EventEmitter {

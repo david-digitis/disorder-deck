@@ -30,8 +30,14 @@
       "Tooltip": "Bascule entre les onglets OP et ALL du panneau admin",
       "Icon": "imgs/actions/toggle-admin",
       "States": [
-        { "Name": "OP", "Image": "imgs/actions/toggle-admin" },
-        { "Name": "ALL", "Image": "imgs/actions/toggle-admin" }
+        {
+          "Name": "OP",
+          "Image": "imgs/actions/toggle-admin"
+        },
+        {
+          "Name": "ALL",
+          "Image": "imgs/actions/toggle-admin"
+        }
       ]
     },
     {
@@ -40,8 +46,14 @@
       "Tooltip": "Bascule entre Fleet et TS Live",
       "Icon": "imgs/actions/toggle-fleet",
       "States": [
-        { "Name": "Fleet", "Image": "imgs/actions/toggle-fleet" },
-        { "Name": "TS Live", "Image": "imgs/actions/toggle-fleet" }
+        {
+          "Name": "Fleet",
+          "Image": "imgs/actions/toggle-fleet"
+        },
+        {
+          "Name": "TS Live",
+          "Image": "imgs/actions/toggle-fleet"
+        }
       ]
     },
     {
@@ -50,8 +62,14 @@
       "Tooltip": "Bascule entre mode Normal et FDG",
       "Icon": "imgs/actions/toggle-mode",
       "States": [
-        { "Name": "Normal", "Image": "imgs/actions/toggle-mode" },
-        { "Name": "FDG", "Image": "imgs/actions/toggle-mode" }
+        {
+          "Name": "Normal",
+          "Image": "imgs/actions/toggle-mode"
+        },
+        {
+          "Name": "FDG",
+          "Image": "imgs/actions/toggle-mode"
+        }
       ]
     },
     {
@@ -60,26 +78,20 @@
       "Tooltip": "Envoie un signal Help visible par tous",
       "Icon": "imgs/actions/help",
       "States": [
-        { "Image": "imgs/actions/help" }
+        {
+          "Image": "imgs/actions/help"
+        }
       ]
     },
     {
       "UUID": "com.digitis.disorder-deck.trigger-dead",
-      "Name": "Dead",
-      "Tooltip": "Marque comme mort / annule",
+      "Name": "Status",
+      "Tooltip": "Cycle de statut : RDY / DEAD / WAIT",
       "Icon": "imgs/actions/dead",
       "States": [
-        { "Name": "Alive", "Image": "imgs/actions/dead" },
-        { "Name": "Dead", "Image": "imgs/actions/dead" }
-      ]
-    },
-    {
-      "UUID": "com.digitis.disorder-deck.reset-dead",
-      "Name": "Reset Dead",
-      "Tooltip": "Reset tous les morts (leads only)",
-      "Icon": "imgs/actions/reset-dead",
-      "States": [
-        { "Image": "imgs/actions/reset-dead" }
+        {
+          "Image": "imgs/actions/dead"
+        }
       ]
     },
     {
@@ -88,7 +100,9 @@
       "Tooltip": "Afficher / masquer l'overlay",
       "Icon": "imgs/actions/toggle-admin",
       "States": [
-        { "Image": "imgs/actions/toggle-admin" }
+        {
+          "Image": "imgs/actions/toggle-admin"
+        }
       ]
     },
     {
@@ -97,7 +111,9 @@
       "Tooltip": "Fermer Disorder Overlay",
       "Icon": "imgs/actions/dead",
       "States": [
-        { "Image": "imgs/actions/dead" }
+        {
+          "Image": "imgs/actions/dead"
+        }
       ]
     }
   ]

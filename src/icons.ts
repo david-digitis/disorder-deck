@@ -123,34 +123,40 @@ export function iconHelp(): string {
   );
 }
 
-// ─── Dead ───
+// ─── Status (RDY / DEAD / WAIT) ───
 
-export function iconDead(isDead: boolean): string {
-  const color = isDead ? '#ED4245' : '#555';
-  const bg = isDead ? '#1a0810' : '#0d0b18';
+export function iconStatus(status?: string): string {
+  const configs: Record<string, { color: string; glowId: string; label: string; bg: string; icon: string }> = {
+    rdy: {
+      color: '#43B581', glowId: 'glow-green', label: 'RDY', bg: '#0d0b18',
+      icon: `<path d="M54 52 L66 64 L90 38" fill="none" stroke="#43B581" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`,
+    },
+    dead: {
+      color: '#ED4245', glowId: 'glow-red', label: 'DEAD', bg: '#1a0810',
+      icon: `<line x1="54" y1="34" x2="90" y2="66" stroke="#ED4245" stroke-width="4" stroke-linecap="round"/>` +
+            `<line x1="90" y1="34" x2="54" y2="66" stroke="#ED4245" stroke-width="4" stroke-linecap="round"/>`,
+    },
+    wait: {
+      color: '#FAA61A', glowId: 'glow-yellow', label: 'WAIT', bg: '#0d0b18',
+      icon: `<circle cx="72" cy="50" r="22" fill="none" stroke="#FAA61A" stroke-width="3"/>` +
+            `<line x1="72" y1="38" x2="72" y2="52" stroke="#FAA61A" stroke-width="3" stroke-linecap="round"/>` +
+            `<line x1="72" y1="52" x2="82" y2="58" stroke="#FAA61A" stroke-width="3" stroke-linecap="round"/>`,
+    },
+  };
+
+  const c = configs[status || ''] || { color: '#555', glowId: '', label: 'STATUS', bg: '#0d0b18',
+    icon: hexagon(72, 50, 24, '#555', 'none', 2) +
+          `<circle cx="72" cy="50" r="4" fill="#555"/>`,
+  };
+
   return svg(
-    (isDead ? `<rect x="0" y="0" width="144" height="72" fill="url(#glow-red)"/>` : '') +
+    (c.glowId ? `<rect x="0" y="0" width="144" height="72" fill="url(#${c.glowId})"/>` : '') +
     scanlines +
-    hexagon(72, 50, 32, color, isDead ? `${color}15` : 'none', 2.5) +
-    `<line x1="54" y1="34" x2="90" y2="66" stroke="${color}" stroke-width="4" stroke-linecap="round"/>` +
-    `<line x1="90" y1="34" x2="54" y2="66" stroke="${color}" stroke-width="4" stroke-linecap="round"/>` +
-    `<text x="72" y="104" text-anchor="middle" fill="${color}" font-family="Consolas,monospace" font-weight="700" font-size="16" letter-spacing="4">${isDead ? 'DEAD' : 'DEAD'}</text>` +
-    (isDead ? `<rect x="24" y="118" width="96" height="2" rx="1" fill="${color}" opacity="0.5"/>` : `<rect x="32" y="118" width="80" height="1" rx="0.5" fill="${color}" opacity="0.2"/>`),
-    bg
-  );
-}
-
-// ─── Reset Dead ───
-
-export function iconResetDead(): string {
-  const color = '#ED4245';
-  return svg(
-    scanlines +
-    hexagon(72, 50, 32, color, `${color}10`, 2) +
-    `<path d="M54 50 A20 20 0 1 1 72 70" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round"/>` +
-    `<polygon points="48,40 54,56 64,44" fill="${color}"/>` +
-    `<text x="72" y="104" text-anchor="middle" fill="${color}" font-family="Consolas,monospace" font-weight="700" font-size="14" letter-spacing="3" opacity="0.7">RESET</text>` +
-    `<rect x="32" y="118" width="80" height="1" rx="0.5" fill="${color}" opacity="0.2"/>`
+    hexagon(72, 50, 32, c.color, `${c.color}15`, 2.5) +
+    c.icon +
+    `<text x="72" y="104" text-anchor="middle" fill="${c.color}" font-family="Consolas,monospace" font-weight="700" font-size="16" letter-spacing="4">${c.label}</text>` +
+    `<rect x="24" y="118" width="96" height="2" rx="1" fill="${c.color}" opacity="0.4"/>`,
+    c.bg
   );
 }
 

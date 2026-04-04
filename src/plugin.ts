@@ -1,6 +1,6 @@
 import streamDeck from '@elgato/streamdeck';
 import { overlayClient, OverlayState } from './overlay-client.js';
-import { iconAdminTab, iconFleetTab, iconTsMode, iconHelp, iconDead, iconResetDead, iconToggleOverlay, iconQuit } from './icons.js';
+import { iconAdminTab, iconFleetTab, iconTsMode, iconHelp, iconStatus, iconToggleOverlay, iconQuit } from './icons.js';
 
 let currentState: OverlayState = {
   adminTab: 'op',
@@ -29,10 +29,7 @@ function updateButtons() {
         action.setImage(iconHelp());
         break;
       case 'com.digitis.disorder-deck.trigger-dead':
-        action.setImage(iconDead(false));
-        break;
-      case 'com.digitis.disorder-deck.reset-dead':
-        action.setImage(iconResetDead());
+        action.setImage(iconStatus(currentState.selfStatus));
         break;
       case 'com.digitis.disorder-deck.toggle-overlay':
         action.setImage(iconToggleOverlay(true));
@@ -70,7 +67,6 @@ streamDeck.actions.onKeyDown((ev) => {
     'com.digitis.disorder-deck.toggle-ts-mode': 'toggle-ts-live-mode',
     'com.digitis.disorder-deck.trigger-help': 'trigger-help',
     'com.digitis.disorder-deck.trigger-dead': 'trigger-dead',
-    'com.digitis.disorder-deck.reset-dead': 'reset-dead',
     'com.digitis.disorder-deck.toggle-overlay': 'toggle-overlay',
     'com.digitis.disorder-deck.quit-overlay': 'quit-overlay',
   };

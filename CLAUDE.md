@@ -19,7 +19,7 @@ Plugin Stream Deck pour controler Disorder Overlay a distance.
   - `plugin.ts` — point d'entree, gestion state + boutons
   - `overlay-client.ts` — client WebSocket vers l'overlay
   - `icons.ts` — generation SVG des icones Stream Deck (144x144)
-  - `actions/` — actions individuelles (trigger-help, trigger-dead, toggles)
+  - `actions/` — actions individuelles (trigger-help, trigger-dead=status cycle, toggles)
 - `com.digitis.disorder-deck.sdPlugin/` — plugin package
   - `manifest.json` — declaration des actions Stream Deck
   - `bin/` — JS compile (gitignore)

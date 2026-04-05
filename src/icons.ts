@@ -160,6 +160,82 @@ export function iconStatus(status?: string): string {
   );
 }
 
+// ─── Toggle Fleet ───
+
+export function iconFleet(visible: boolean): string {
+  const color = visible ? '#43B581' : '#555';
+  const glowId = visible ? 'glow-green' : '';
+  return svg(
+    (visible ? `<rect x="0" y="0" width="144" height="72" fill="url(#${glowId})"/>` : '') +
+    scanlines +
+    hexagon(72, 50, 32, color, visible ? `${color}15` : 'none', 2) +
+    `<line x1="48" y1="38" x2="96" y2="38" stroke="${color}" stroke-width="2.5" stroke-linecap="round"/>` +
+    `<line x1="48" y1="50" x2="96" y2="50" stroke="${color}" stroke-width="2.5" stroke-linecap="round"/>` +
+    `<line x1="48" y1="62" x2="96" y2="62" stroke="${color}" stroke-width="2.5" stroke-linecap="round"/>` +
+    `<circle cx="42" cy="38" r="2.5" fill="${color}"/>` +
+    `<circle cx="42" cy="50" r="2.5" fill="${color}"/>` +
+    `<circle cx="42" cy="62" r="2.5" fill="${color}"/>` +
+    `<text x="72" y="104" text-anchor="middle" fill="${color}" font-family="Consolas,monospace" font-weight="700" font-size="14" letter-spacing="2">${visible ? 'FLEET' : 'FLEET'}</text>` +
+    `<rect x="32" y="118" width="80" height="1" rx="0.5" fill="${color}" opacity="0.3"/>`
+  );
+}
+
+// ─── Toggle TS Live ───
+
+export function iconTsLive(visible: boolean): string {
+  const color = visible ? '#00BCD4' : '#555';
+  const glowId = visible ? 'glow-cyan' : '';
+  return svg(
+    (visible ? `<rect x="0" y="0" width="144" height="72" fill="url(#${glowId})"/>` : '') +
+    scanlines +
+    hexagon(72, 50, 32, color, visible ? `${color}15` : 'none', 2) +
+    `<circle cx="62" cy="44" r="7" fill="none" stroke="${color}" stroke-width="1.5"/>` +
+    `<circle cx="82" cy="44" r="7" fill="none" stroke="${color}" stroke-width="1.5"/>` +
+    `<circle cx="72" cy="58" r="7" fill="none" stroke="${color}" stroke-width="1.5"/>` +
+    `<text x="72" y="102" text-anchor="middle" fill="${color}" font-family="Consolas,monospace" font-weight="700" font-size="13" letter-spacing="1">TS LIVE</text>` +
+    `<rect x="32" y="118" width="80" height="1" rx="0.5" fill="${color}" opacity="0.3"/>`
+  );
+}
+
+// ─── Raid Commands ───
+
+export function iconRaid(type: string): string {
+  const configs: Record<string, { color: string; glowId: string; label: string; icon: string }> = {
+    'check-raid': {
+      color: '#ED4245', glowId: 'glow-red', label: 'RAID',
+      icon: `<line x1="52" y1="60" x2="72" y2="36" stroke="#ED4245" stroke-width="3" stroke-linecap="round"/>` +
+            `<line x1="72" y1="36" x2="92" y2="60" stroke="#ED4245" stroke-width="3" stroke-linecap="round"/>` +
+            `<line x1="56" y1="52" x2="88" y2="52" stroke="#ED4245" stroke-width="2" stroke-linecap="round"/>`,
+    },
+    'raid-off': {
+      color: '#43B581', glowId: 'glow-green', label: 'R.OFF',
+      icon: `<path d="M54 52 L66 64 L90 38" fill="none" stroke="#43B581" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`,
+    },
+    'rally': {
+      color: '#FAA61A', glowId: 'glow-yellow', label: 'RALLY',
+      icon: `<polygon points="50,38 62,38 58,58 46,58" fill="none" stroke="#FAA61A" stroke-width="2"/>` +
+            `<line x1="62" y1="38" x2="96" y2="38" stroke="#FAA61A" stroke-width="2.5" stroke-linecap="round"/>` +
+            `<line x1="60" y1="44" x2="90" y2="44" stroke="#FAA61A" stroke-width="1.5" stroke-linecap="round"/>` +
+            `<line x1="58" y1="50" x2="84" y2="50" stroke="#FAA61A" stroke-width="1" stroke-linecap="round"/>`,
+    },
+    'reset-status': {
+      color: '#5B54A4', glowId: 'glow-purple', label: 'RESET',
+      icon: `<path d="M54 50 A20 20 0 1 1 72 70" fill="none" stroke="#5B54A4" stroke-width="3" stroke-linecap="round"/>` +
+            `<polygon points="48,40 54,56 64,44" fill="#5B54A4"/>`,
+    },
+  };
+
+  const c = configs[type] || configs['check-raid'];
+  return svg(
+    `<rect x="0" y="0" width="144" height="72" fill="url(#${c.glowId})"/>` +
+    scanlines +
+    hexagon(72, 50, 32, c.color, `${c.color}15`, 2.5) +
+    c.icon +
+    `<text x="72" y="104" text-anchor="middle" fill="${c.color}" font-family="Consolas,monospace" font-weight="700" font-size="14" letter-spacing="3">${c.label}</text>` +
+    `<rect x="24" y="118" width="96" height="2" rx="1" fill="${c.color}" opacity="0.4"/>`
+  );
+}
+
 // ─── Toggle Overlay visibility ───
 
 export function iconToggleOverlay(visible: boolean): string {

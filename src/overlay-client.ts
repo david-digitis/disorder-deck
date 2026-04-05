@@ -6,12 +6,13 @@ const RECONNECT_INTERVAL = 5000;
 
 export interface OverlayState {
   adminTab: string;
-  fleetTab: string;
   tsLiveMode: string;
   tsConnected: boolean;
   voiceCount: number;
   whisperActive: boolean;
   selfStatus?: string;
+  fleetVisible: boolean;
+  tsLiveVisible: boolean;
 }
 
 class OverlayClient extends EventEmitter {

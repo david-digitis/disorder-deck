@@ -1,42 +1,84 @@
 import streamDeck from '@elgato/streamdeck';
 import { overlayClient, OverlayState } from './overlay-client.js';
-import { iconAdminTab, iconFleetTab, iconTsMode, iconHelp, iconStatus, iconToggleOverlay, iconQuit } from './icons.js';
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+// Resolve path to imgs/actions/ relative to compiled JS location (bin/)
+const __dirname_ = dirname(fileURLToPath(import.meta.url));
+const iconsDir = join(__dirname_, '..', 'imgs', 'actions');
+
+// Cache loaded GIFs as base64 data URIs
+const gifCache = new Map<string, string>();
+
+function loadGif(name: string): string {
+  if (gifCache.has(name)) return gifCache.get(name)!;
+  try {
+    const data = readFileSync(join(iconsDir, `${name}.gif`));
+    const uri = `data:image/gif;base64,${data.toString('base64')}`;
+    gifCache.set(name, uri);
+    return uri;
+  } catch {
+    streamDeck.logger.error(`Failed to load icon: ${name}.gif`);
+    return '';
+  }
+}
 
 let currentState: OverlayState = {
   adminTab: 'op',
-  fleetTab: 'fleet',
   tsLiveMode: 'normal',
   tsConnected: false,
   voiceCount: 0,
   whisperActive: false,
+  fleetVisible: false,
+  tsLiveVisible: true,
 };
 
-// Update all visible buttons based on current state
 function updateButtons() {
   for (const action of streamDeck.actions) {
     const id = action.manifestId;
+    let gif = '';
     switch (id) {
       case 'com.digitis.disorder-deck.toggle-admin-tab':
-        action.setImage(iconAdminTab(currentState.adminTab));
+        gif = currentState.adminTab === 'op' ? 'admin-op' : 'admin-all';
         break;
-      case 'com.digitis.disorder-deck.toggle-fleet-tab':
-        action.setImage(iconFleetTab(currentState.fleetTab));
+      case 'com.digitis.disorder-deck.toggle-fleet':
+        gif = currentState.fleetVisible ? 'fleet-on' : 'fleet-off';
+        break;
+      case 'com.digitis.disorder-deck.toggle-ts-live':
+        gif = currentState.tsLiveVisible ? 'tslive-on' : 'tslive-off';
         break;
       case 'com.digitis.disorder-deck.toggle-ts-mode':
-        action.setImage(iconTsMode(currentState.tsLiveMode));
+        gif = currentState.tsLiveMode === 'normal' ? 'mode-normal' : 'mode-fdg';
         break;
       case 'com.digitis.disorder-deck.trigger-help':
-        action.setImage(iconHelp());
+        gif = 'help';
         break;
       case 'com.digitis.disorder-deck.trigger-dead':
-        action.setImage(iconStatus(currentState.selfStatus));
+        gif = `status-${currentState.selfStatus || 'none'}`;
+        break;
+      case 'com.digitis.disorder-deck.check-raid':
+        gif = 'raid-check';
+        break;
+      case 'com.digitis.disorder-deck.raid-off':
+        gif = 'raid-off';
+        break;
+      case 'com.digitis.disorder-deck.rally':
+        gif = 'rally';
+        break;
+      case 'com.digitis.disorder-deck.reset-status':
+        gif = 'reset-status';
         break;
       case 'com.digitis.disorder-deck.toggle-overlay':
-        action.setImage(iconToggleOverlay(true));
+        gif = 'overlay-show'; // TODO: track visibility state
         break;
       case 'com.digitis.disorder-deck.quit-overlay':
-        action.setImage(iconQuit());
+        gif = 'quit';
         break;
+    }
+    if (gif) {
+      const data = loadGif(gif);
+      if (data) action.setImage(data);
     }
   }
 }
@@ -63,10 +105,15 @@ streamDeck.actions.onKeyDown((ev) => {
 
   const commands: Record<string, string> = {
     'com.digitis.disorder-deck.toggle-admin-tab': 'toggle-admin-tab',
-    'com.digitis.disorder-deck.toggle-fleet-tab': 'toggle-fleet-tab',
+    'com.digitis.disorder-deck.toggle-fleet': 'toggle-fleet',
+    'com.digitis.disorder-deck.toggle-ts-live': 'toggle-ts-live',
     'com.digitis.disorder-deck.toggle-ts-mode': 'toggle-ts-live-mode',
     'com.digitis.disorder-deck.trigger-help': 'trigger-help',
     'com.digitis.disorder-deck.trigger-dead': 'trigger-dead',
+    'com.digitis.disorder-deck.check-raid': 'check-raid',
+    'com.digitis.disorder-deck.raid-off': 'raid-off',
+    'com.digitis.disorder-deck.rally': 'rally',
+    'com.digitis.disorder-deck.reset-status': 'reset-all-status',
     'com.digitis.disorder-deck.toggle-overlay': 'toggle-overlay',
     'com.digitis.disorder-deck.quit-overlay': 'quit-overlay',
   };
@@ -74,7 +121,6 @@ streamDeck.actions.onKeyDown((ev) => {
   const command = commands[ev.action.manifestId];
   if (command) {
     overlayClient.send(command);
-    // Immediate visual feedback
     if (command === 'trigger-help') ev.action.showOk();
   }
 });

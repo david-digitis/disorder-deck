@@ -13,6 +13,9 @@ export interface OverlayState {
   selfStatus?: string;
   fleetVisible: boolean;
   tsLiveVisible: boolean;
+  isOp?: boolean;
+  autoPingActive?: boolean;
+  clipRecording?: boolean;
 }
 
 class OverlayClient extends EventEmitter {

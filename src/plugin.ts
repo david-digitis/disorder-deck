@@ -69,8 +69,17 @@ function updateButtons() {
       case 'com.digitis.disorder-deck.reset-status':
         gif = 'reset-status';
         break;
+      case 'com.digitis.disorder-deck.screenshot':
+        gif = 'screenshot';
+        break;
+      case 'com.digitis.disorder-deck.toggle-clip':
+        gif = currentState.clipRecording ? 'clip-on' : 'clip-off';
+        break;
+      case 'com.digitis.disorder-deck.toggle-auto-ping':
+        gif = currentState.autoPingActive ? 'ping-on' : 'ping-off';
+        break;
       case 'com.digitis.disorder-deck.toggle-overlay':
-        gif = 'overlay-show'; // TODO: track visibility state
+        gif = 'overlay-show';
         break;
       case 'com.digitis.disorder-deck.quit-overlay':
         gif = 'quit';
@@ -114,6 +123,9 @@ streamDeck.actions.onKeyDown((ev) => {
     'com.digitis.disorder-deck.raid-off': 'raid-off',
     'com.digitis.disorder-deck.rally': 'rally',
     'com.digitis.disorder-deck.reset-status': 'reset-all-status',
+    'com.digitis.disorder-deck.screenshot': 'take-screenshot',
+    'com.digitis.disorder-deck.toggle-clip': 'toggle-clip',
+    'com.digitis.disorder-deck.toggle-auto-ping': 'toggle-auto-ping',
     'com.digitis.disorder-deck.toggle-overlay': 'toggle-overlay',
     'com.digitis.disorder-deck.quit-overlay': 'quit-overlay',
   };

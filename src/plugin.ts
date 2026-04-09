@@ -76,13 +76,13 @@ function updateButtons() {
         gif = currentState.autoPingActive ? 'ping-on' : 'ping-off';
         break;
       case 'com.digitis.disorder-deck.studio-record':
-        gif = currentState.studioRecording ? 'clip-on' : 'clip-off';
+        gif = currentState.studioRecording ? 'record-on' : 'record-off';
         break;
       case 'com.digitis.disorder-deck.studio-buffer':
-        gif = currentState.studioBufferActive ? 'ping-on' : 'ping-off';
+        gif = currentState.studioBufferActive ? 'buffer-on' : 'buffer-off';
         break;
       case 'com.digitis.disorder-deck.studio-replay':
-        gif = 'screenshot';
+        gif = 'replay-save';
         break;
       case 'com.digitis.disorder-deck.toggle-overlay':
         gif = 'overlay-show';

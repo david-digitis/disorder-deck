@@ -48,9 +48,6 @@ function updateButtons() {
       case 'com.digitis.disorder-deck.toggle-ts-live':
         gif = currentState.tsLiveVisible ? 'tslive-on' : 'tslive-off';
         break;
-      case 'com.digitis.disorder-deck.toggle-ts-mode':
-        gif = currentState.tsLiveMode === 'normal' ? 'mode-normal' : 'mode-fdg';
-        break;
       case 'com.digitis.disorder-deck.trigger-help':
         gif = 'help';
         break;
@@ -77,6 +74,15 @@ function updateButtons() {
         break;
       case 'com.digitis.disorder-deck.toggle-auto-ping':
         gif = currentState.autoPingActive ? 'ping-on' : 'ping-off';
+        break;
+      case 'com.digitis.disorder-deck.studio-record':
+        gif = currentState.studioRecording ? 'clip-on' : 'clip-off';
+        break;
+      case 'com.digitis.disorder-deck.studio-buffer':
+        gif = currentState.studioBufferActive ? 'ping-on' : 'ping-off';
+        break;
+      case 'com.digitis.disorder-deck.studio-replay':
+        gif = 'screenshot';
         break;
       case 'com.digitis.disorder-deck.toggle-overlay':
         gif = 'overlay-show';
@@ -116,7 +122,6 @@ streamDeck.actions.onKeyDown((ev) => {
     'com.digitis.disorder-deck.toggle-admin-tab': 'toggle-admin-tab',
     'com.digitis.disorder-deck.toggle-fleet': 'toggle-fleet',
     'com.digitis.disorder-deck.toggle-ts-live': 'toggle-ts-live',
-    'com.digitis.disorder-deck.toggle-ts-mode': 'toggle-ts-live-mode',
     'com.digitis.disorder-deck.trigger-help': 'trigger-help',
     'com.digitis.disorder-deck.trigger-dead': 'trigger-dead',
     'com.digitis.disorder-deck.check-raid': 'check-raid',
@@ -126,6 +131,9 @@ streamDeck.actions.onKeyDown((ev) => {
     'com.digitis.disorder-deck.screenshot': 'take-screenshot',
     'com.digitis.disorder-deck.toggle-clip': 'toggle-clip',
     'com.digitis.disorder-deck.toggle-auto-ping': 'toggle-auto-ping',
+    'com.digitis.disorder-deck.studio-record': 'studio-record',
+    'com.digitis.disorder-deck.studio-buffer': 'studio-buffer',
+    'com.digitis.disorder-deck.studio-replay': 'studio-replay',
     'com.digitis.disorder-deck.toggle-overlay': 'toggle-overlay',
     'com.digitis.disorder-deck.quit-overlay': 'quit-overlay',
   };

@@ -16,6 +16,8 @@ export interface OverlayState {
   isOp?: boolean;
   autoPingActive?: boolean;
   clipRecording?: boolean;
+  studioRecording?: boolean;
+  studioBufferActive?: boolean;
 }
 
 class OverlayClient extends EventEmitter {
